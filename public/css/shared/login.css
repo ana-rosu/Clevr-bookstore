@@ -35,7 +35,7 @@ form {
 .text_field {
   position: relative;
   border-bottom: 0.2rem solid #adadad;
-  margin: 3rem 0;
+  margin: 4rem 0;
 }
 
 .text_field input {
@@ -68,7 +68,7 @@ form {
 }
 .text_field input:focus ~ label,
 .text_field input:valid ~ label {
-  top: -2.2rem;
+  top: -2.5rem;
   color: var(--color-primary);
 }
 .text_field input:focus ~ span::before,

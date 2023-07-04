@@ -1,0 +1,58 @@
+@import "variables.css";
+
+footer {
+  padding: 5rem 7rem;
+}
+footer h4 {
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+}
+footer p {
+  margin: 3rem 0;
+  width: 70%;
+}
+footer .flex {
+  align-items: flex-start;
+}
+.socials .flex {
+  justify-content: flex-start;
+  gap: 2rem;
+}
+.socials i {
+  font-size: 2rem;
+  color: var(--color-primary-lighter);
+  transition: 0.5s;
+}
+.socials li {
+  padding: 1rem 1.5rem;
+  border: 1px solid #f0e4f4;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.socials li:hover {
+  background-color: var(--color-primary);
+}
+.socials li:hover i {
+  color: var(--color-white);
+}
+.col2,
+.col3 {
+  width: 25rem;
+}
+.col2 ul li,
+.col3 ul li {
+  margin-bottom: 2rem;
+}
+footer input[type="email"] {
+  padding: 2rem 3rem;
+  margin-right: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  background-color: var(--color-light-grey);
+  font-size: 1.6rem;
+}
+footer .btn {
+  display: inline-block;
+  border: none;
+}
