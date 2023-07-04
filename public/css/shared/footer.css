@@ -56,3 +56,23 @@ footer .btn {
   display: inline-block;
   border: none;
 }
+footer a,
+footer a:visited,
+footer a:hover,
+footer a:active {
+  color: black;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 800px) {
+  footer {
+    padding: 1rem;
+  }
+  footer div.flex {
+    flex-direction: column;
+  }
+  .socials .flex {
+    gap: 1rem;
+  }
+}

@@ -113,3 +113,12 @@ input[type="search"]::placeholder {
   z-index: 100;
   background-color: var(--color-white);
 }
+
+@media (max-width: 800px) {
+  .hide-for-mobile {
+    display: none;
+  }
+  nav {
+    padding: 0 1rem;
+  }
+}

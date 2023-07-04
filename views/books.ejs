@@ -1,13 +1,21 @@
-<div>Home/Books</div>
-<section>
+<div id="books-path">
+  <span><a href="/">Home</a> </span> / Books
+</div>
+<section id="book-section">
   <h1>Books</h1>
   <div id="book-grid">
     <% books.forEach(function(book) { %>
     <div class="book">
-      <img src="<%= book.cover %>" alt="<%= book.title %>" />
-      <h4><%= book.genres?.length ? book.genres[0] : '' %></h4>
-      <h3><%= book.title %></h3>
-      <p><%= book.authors[0] %></p>
+      <div class="book-cover">
+        <img src="<%= book.cover %>" alt="<%= book.title %>" />
+      </div>
+      <div class="book-info">
+        <h4 class="book-genre">
+          <%= book.genres?.length ? book.genres[0] : '' %>
+        </h4>
+        <h3 class="book-title"><%= book.title %></h3>
+        <p class="book-author"><%= book.authors[0] %></p>
+      </div>
     </div>
     <% }) %>
   </div>
