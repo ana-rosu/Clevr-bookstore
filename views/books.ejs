@@ -1,0 +1,14 @@
+<div>Home/Books</div>
+<section>
+  <h1>Books</h1>
+  <div id="book-grid">
+    <% books.forEach(function(book) { %>
+    <div class="book">
+      <img src="<%= book.cover %>" alt="<%= book.title %>" />
+      <h4><%= book.genres?.length ? book.genres[0] : '' %></h4>
+      <h3><%= book.title %></h3>
+      <p><%= book.authors[0] %></p>
+    </div>
+    <% }) %>
+  </div>
+</section>

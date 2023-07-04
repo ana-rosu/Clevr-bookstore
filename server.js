@@ -7,9 +7,11 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+// const booksRouter = require("./routes/books");
 const bodyParser = require("body-parser");
 
 app.use(express.static("public"));
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
@@ -25,6 +27,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: false })); //sending va
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+// app.use("/books", booksRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Serverul rulează la adresa http://localhost:3000`);
