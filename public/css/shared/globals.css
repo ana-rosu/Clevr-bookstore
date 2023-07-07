@@ -50,3 +50,24 @@ ul {
   justify-content: center;
   gap: 1rem;
 }
+::-webkit-scrollbar {
+  width: 0.8rem; /* Width of the scrollbar */
+}
+
+/* Track background */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary); /* Color of the scrollbar handle */
+  border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(
+    --color-primary-lighter
+  ); /* Color of the scrollbar handle on hover */
+}

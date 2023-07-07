@@ -1,6 +1,7 @@
 <div id="books-path">
   <span><a href="/">Home</a> </span> / Books
 </div>
+
 <section id="book-section">
   <h1>Books</h1>
   <div id="book-grid">
@@ -14,7 +15,9 @@
           <%= book.genres?.length ? book.genres[0] : '' %>
         </h4>
         <h3 class="book-title"><%= book.title %></h3>
+        <% if (book.authors && book.authors.length > 0) { %>
         <p class="book-author"><%= book.authors[0] %></p>
+        <% } %>
       </div>
     </div>
     <% }) %>
