@@ -1,68 +1,70 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+
+const initializePassport = require("../passport-config");
+const flash = require("express-flash");
+const session = require("express-session");
+// const API_URL = require("../public/js/config");
 
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.use(flash());
+router.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 router.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
-const fetchBookData = async () => {
-  try {
-    const response = await fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=programming"
-    );
-    const data = await response.json();
+initializePassport(
+  passport,
+  (email) => users.find((user) => user.email === email),
+  (id) => users.find((user) => user.id === id)
+);
 
-    const books = data.items.map((book) => {
-      return {
-        title: book.volumeInfo.title,
-        authors: book.volumeInfo.authors,
-        description: book.volumeInfo.description,
-        cover: book.volumeInfo.imageLinks.thumbnail,
-        genres: book.volumeInfo.categories,
-        pageCount: book.volumeInfo.pageCount,
-        publishedDate: book.volumeInfo.publishedDate,
-      };
-    });
-
-    return books;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
-router.get("/books", async (req, res) => {
-  try {
-    const books = await fetchBookData();
-
-    res.render("books.ejs", { books });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-// router.post("/books", (req, res) => {
-//   console.log(req.body);
-//   console.log("hei");
-//   const { books } = req.body;
-//   console.log(books);
-//   res.render("books.ejs", { books: books });
-// });
-
+const users = [];
 router.get("/login", (req, res) => {
   res.render("login.ejs", { layout: false });
 });
 router.get("/signup", (req, res) => {
   res.render("signup.ejs", { layout: false });
 });
-router.post("/login", (req, res) => {});
-router.post("/signup", (req, res) => {});
-
-router.get("*", (req, res) => {
-  res.render("404.ejs", { layout: false });
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
+router.post("/signup", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    users.push({
+      id: Date.now().toString(),
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    console.log(users);
+    res.redirect("/login");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/signup");
+  }
 });
+
 module.exports = router;
